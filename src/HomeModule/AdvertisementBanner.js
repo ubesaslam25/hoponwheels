@@ -9,7 +9,7 @@ class AdvertisementBanner extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

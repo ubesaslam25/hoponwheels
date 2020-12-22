@@ -2,44 +2,109 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/images/logo_1.png" />
     <!-- manifest.json provides metadata used when your web app is installed on a user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/ -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Hop on Wheels</title>
-		<title>Hop on Wheels</title>
-		<link rel="icon" href="%PUBLIC_URL%/assets/favicon.ico">
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-		<!-- JqueryUI -->
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/jquery-ui.css">
-		<!-- Bootstrap -->
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/boostrap/bootstrap.min.css">
-		<!-- Awesome font icons -->
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/font-awesome.min.css">
-		<!--magnific popup-->
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/magnific-popup/magnific-popup.css" media="screen"/>
-		<!-- Owlcoursel -->
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/owl-coursel/owl.carousel.css">
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/owl-coursel/owl.theme.css">
-		<!-- Main style -->
-		<link  rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/style.css">
-		<!-- Padding / Margin -->
-		<link  rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/padd-mr.css">
-		<!-- light version-->
-		<link id="vers" rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/light-version.css">
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/jquery.timepicker.min.css">
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/jquery.datetimepicker.css">
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/owl.carousel.min.css" />
-		<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/animate.min.css" />
-		<link rel="stylesheet/less" type="text/css" href="%PUBLIC_URL%/assets/css/slider.less">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
+	<!-- JqueryUI -->
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/jquery-ui.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/boostrap/bootstrap.min.css">
+	<!-- Awesome font icons -->
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/font-awesome.min.css">
+	<!--magnific popup-->
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/magnific-popup/magnific-popup.css" media="screen"/>
+	<!-- Owlcoursel -->
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/owl-coursel/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/owl-coursel/owl.theme.css">
+	<!-- Main style -->
+	<link  rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/style.css">
+	<!-- Padding / Margin -->
+	<link  rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/padd-mr.css">
+	<!-- light version-->
+	<link id="vers" rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/light-version.css">
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/jquery.timepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/jquery.datetimepicker.css">
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/owl.carousel.min.css" />
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/animate.min.css" />
+	<link rel="stylesheet/less" type="text/css" href="%PUBLIC_URL%/assets/css/slider.less">
+	<link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+	<style>
+		.css-1hb7zxy-IndicatorsContainer{
+			display: none !important;
+		}
+		.css-yk16xz-control{
+			font-size: var(--font16px) !important;
+			color: #FE003C !important;
+			background: transparent !important;
+			border: none !important;
+			padding: 0 !important;
+			height: 14px !important;
+			letter-spacing: 0px !important;
+			opacity: 1 !important;
+			text-align: left !important;
+			font-weight: 600 !important;
+			min-height: 14px !important;
+		}
+		.css-1afwqdm-SingleValue, .css-1wa3eu0-placeholder{
+			font-size: var(--font16px) !important;
+			color: #FE003C !important;
+		}
+		.datepicker-control-section {
+			max-width: 246px;
+			margin: 30px auto;
+			padding-top: 50px;
+		}
+		.e-input-group{
+			width: 10% !important;
+			border: unset !important;
+		}
+		.e-input-group span.e-date-icon{
+			position: absolute !important;
+			bottom: -54px !important;
+			left: 65px !important;
+		}
+		.e-input-group span.e-time-icon{
+			position: absolute !important;
+			bottom: -54px !important;
+			right: -140px !important;
+		}
+		.e-input-group input, .e-clear-icon{
+			display: none !important;
+		}
+		.e-input-group-icon{
+			color: #e62e36 !important;
+		}
+		.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after{
+			background: transparent !important;
+		}
+		#pickuptime, #returntime{
+			margin-left: 22px !important;
+		}
+		.e-timepicker{
+			width: 100px !important;
+			margin-left: 90px;
+			margin-top: 55px;
+		}
+		label{
+			margin-bottom: 0 !important;
+		}
+		.sticky{
+			z-index: 999999 !important;
+		}
+		.preloader{
+			/* z-index: 9999999 !important; */
+			z-index: -1 !important;
+			display: block !important;
+		}
+	</style>
   </head>
   <body class="bg-3">
 	<!-- Preloader -->
@@ -47,6 +112,6 @@
 	<div id="wrap" class="color1-inher">
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
-  	</div>
+	  </div>
   </body>
 </html>

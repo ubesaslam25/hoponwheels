@@ -9,7 +9,7 @@ class WhyChooseUs extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 
@@ -19,7 +19,7 @@ class WhyChooseUs extends Component {
             <div className="product product-grid product-grid-2 car m-t-lg-90 p-t-sm-35 m-b-lg-20">
                 <div className="row">
                     <div className="col-lg-2">
-                        <div className="product-item" style={{transition: 'none', '-webkit-transition': 'none'}}>
+                        <div className="product-item" style={{transition: 'none', 'WebkitTransition': 'none'}}>
                             <h1 className="text-justify">WHY</h1>
                             <h3 className="text-justify">CHOOSE US</h3>
                         </div>

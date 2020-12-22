@@ -9,7 +9,7 @@ class MembershipBanner extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

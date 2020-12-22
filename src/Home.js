@@ -36,7 +36,7 @@ class Home extends Component {
             <script crossorigin src="assets/js/jquery/jquery-ui.js"></script>
             <script crossorigin src="assets/js/bootstrap/bootstrap.min.js"></script>
             <script crossorigin src="assets/js/magnific-popup/jquery.magnific-popup.min.js"></script>
-            <script crossorigin src="assets/js/jquery.counterup/waypoints.min.js"></script>
+            {/* <script crossorigin src="assets/js/jquery.counterup/waypoints.min.js"></script> */}
             <script crossorigin src="assets/js/jquery.counterup/jquery.counterup.min.js"></script>
             <script crossorigin src="assets/js/owl-coursel/owl.carousel.js"></script>
             <script crossorigin src="assets/js/script.js"></script>

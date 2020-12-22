@@ -9,7 +9,7 @@ class Testimonials extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

@@ -9,7 +9,7 @@ class HotelAndRestaurants extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

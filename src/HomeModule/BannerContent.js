@@ -9,7 +9,7 @@ class BannerContent extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

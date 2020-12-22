@@ -9,7 +9,7 @@ class OurLocation extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

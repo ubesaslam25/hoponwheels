@@ -9,7 +9,7 @@ class Header extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

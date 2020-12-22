@@ -9,7 +9,7 @@ class SocialNetwork extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 
@@ -21,7 +21,7 @@ class SocialNetwork extends Component {
                     <div className="col-lg-6 section-videos">
                         <h3>Featured videos</h3>
                         <div className="video-box">
-                            <div className="video-box-thumbnail" style={{'background-image': 'url(assets/images/video-box-1.png)'}}>
+                            <div className="video-box-thumbnail" style={{backgroundImage: 'url(assets/images/video-box-1.png)'}}>
                                 <div className="video-box-overlay"></div>
                                 <span className="video-box-overlay-icon"><i className="fa fa-play"></i></span>
                             </div>	
@@ -33,7 +33,7 @@ class SocialNetwork extends Component {
                             <div className="clearfix"></div>
                         </div>
                         <div className="video-box">
-                            <div className="video-box-thumbnail" style={{'background-image':' url(assets/images/video-box-2.png)'}}>
+                            <div className="video-box-thumbnail" style={{backgroundImage:' url(assets/images/video-box-2.png)'}}>
                                 <div className="video-box-overlay"></div>
                                 <span className="video-box-overlay-icon"><i className="fa fa-play"></i></span>
                             </div>		
@@ -45,7 +45,7 @@ class SocialNetwork extends Component {
                             <div className="clearfix"></div>
                         </div>
                         <div className="video-box">
-                            <div className="video-box-thumbnail" style={{'background-image': 'url(assets/images/video-box-3.png)'}}>
+                            <div className="video-box-thumbnail" style={{backgroundImage: 'url(assets/images/video-box-3.png)'}}>
                                 <div className="video-box-overlay"></div>
                                 <span className="video-box-overlay-icon"><i className="fa fa-play"></i></span>
                             </div>		
@@ -60,7 +60,7 @@ class SocialNetwork extends Component {
                     <div className="col-lg-6 section-social">
                         <h3>We in social media</h3>
                         <div className="social-box">
-                            <div className="social-box-thumbnail" style={{'background-image': 'url(assets/images/social-box-1.png)'}}>
+                            <div className="social-box-thumbnail" style={{backgroundImage: 'url(assets/images/social-box-1.png)'}}>
                                 <div className="social-box-overlay-icon">
                                     <img src="assets/images/icons/instagram.svg" alt="" />
                                     <span>4 days ago</span>
@@ -73,7 +73,7 @@ class SocialNetwork extends Component {
                             <div className="clearfix"></div>
                         </div>
                         <div className="social-box">
-                            <div className="social-box-thumbnail" style={{'background-image': 'url(assets/images/social-box-2.png)'}}>
+                            <div className="social-box-thumbnail" style={{backgroundImage: 'url(assets/images/social-box-2.png)'}}>
                                 <div className="social-box-overlay-icon">
                                     <img src="assets/images/icons/youtube.svg" alt="" />
                                     <span>4 days ago</span>
@@ -98,7 +98,7 @@ class SocialNetwork extends Component {
                             <div className="clearfix"></div>
                         </div>
                         <div className="social-box">
-                            <div className="social-box-thumbnail" style={{'background-image': 'url(assets/images/social-box-3.png)'}}>
+                            <div className="social-box-thumbnail" style={{backgroundImage: 'url(assets/images/social-box-3.png)'}}>
                                 <div className="social-box-overlay-icon">
                                     <img src="assets/images/icons/facebook.svg" alt="" />
                                     <span>4 days ago</span>

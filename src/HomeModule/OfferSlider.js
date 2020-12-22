@@ -9,7 +9,7 @@ class OfferSlider extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 
@@ -25,7 +25,7 @@ class OfferSlider extends Component {
                     </ol>
                 
                     <div className="carousel-inner" role="listbox">
-                        <div className="item active" style={{'background-image': 'url(assets/images/slider.png)'}}>
+                        <div className="item active" style={{backgroundImage: 'url(assets/images/slider.png)'}}>
                             <div className="carousel-caption">
                                 <h6>Planning for a long-term rental?</h6>
                                 <Link to={"#"} className="btn btn-default"><span>15%</span><br />OFF</Link>
@@ -34,7 +34,7 @@ class OfferSlider extends Component {
                             </div>
                         </div>
                     
-                        <div className="item" style={{'background-image': 'url(assets/images/slider.png)'}}>
+                        <div className="item" style={{backgroundImage: 'url(assets/images/slider.png)'}}>
                             <div className="carousel-caption">
                                 <h6>Planning for a long-term rental?</h6>
                                 <Link to={"#"} className="btn btn-default"><span>15%</span><br />OFF</Link>
@@ -43,7 +43,7 @@ class OfferSlider extends Component {
                             </div>
                         </div>
                         
-                        <div className="item" style={{'background-image': 'url(assets/images/slider.png)'}}>
+                        <div className="item" style={{backgroundImage: 'url(assets/images/slider.png)'}}>
                             <div className="carousel-caption">
                                 <h6>Planning for a long-term rental?</h6>
                                 <Link to={"#"} className="btn btn-default"><span>15%</span><br />OFF</Link>

@@ -9,7 +9,7 @@ class OurPartners extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 

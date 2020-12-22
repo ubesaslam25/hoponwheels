@@ -9,7 +9,7 @@ class TourShowcase extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 
@@ -25,7 +25,7 @@ class TourShowcase extends Component {
                     <div className="col-lg-3">
                         <div className="white-space">&nbsp;</div>
                         <div className="showcase-item">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/category1.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/category1.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -36,7 +36,7 @@ class TourShowcase extends Component {
                     </div>
                     <div className="col-lg-3">
                         <div className="showcase-item active">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/category2.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/category2.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -46,7 +46,7 @@ class TourShowcase extends Component {
                     </div>
                     <div className="col-lg-3">
                         <div className="showcase-item active">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/category3.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/category3.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -57,7 +57,7 @@ class TourShowcase extends Component {
                     <div className="col-lg-3">
                         <div className="white-space">&nbsp;</div>
                         <div className="showcase-item">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/category4.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/category4.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -75,7 +75,7 @@ class TourShowcase extends Component {
                     <div className="col-lg-3">
                         <div className="white-space">&nbsp;</div>
                         <div className="showcase-item">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/mood1.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/mood1.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -86,7 +86,7 @@ class TourShowcase extends Component {
                     </div>
                     <div className="col-lg-3">
                         <div className="showcase-item active">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/mood2.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/mood2.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -96,7 +96,7 @@ class TourShowcase extends Component {
                     </div>
                     <div className="col-lg-3">
                         <div className="showcase-item active">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/mood3.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/mood3.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>
@@ -107,7 +107,7 @@ class TourShowcase extends Component {
                     <div className="col-lg-3">
                         <div className="white-space">&nbsp;</div>
                         <div className="showcase-item">
-                            <div className="showcase-image" style={{'background-image': 'url(assets/images/mood4.png)'}}>
+                            <div className="showcase-image" style={{backgroundImage: 'url(assets/images/mood4.png)'}}>
                                 <div className="showcase-overlay"></div></div>
                             <div className="showcase-caption">
                                 <div className="title">Attraction Tickets</div>

@@ -9,7 +9,7 @@ class OurBusiness extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         
     }
 
@@ -21,31 +21,31 @@ class OurBusiness extends Component {
                 <p>Join Hop on Wheels family and be a part of the extravaganza</p>
                 <div className="row">
                     <div className="business-box">
-                        <div className="business-box-img" style={{'background-image': 'url(assets/images/my-business-1.png)'}}></div>	
+                        <div className="business-box-img" style={{backgroundImage: 'url(assets/images/my-business-1.png)'}}></div>	
                         <div className="business-box-caption">
                             <div className="description">Automated online on-boarding process</div>
                         </div>
                     </div>
                     <div className="business-box">
-                        <div className="business-box-img" style={{'background-image': 'url(assets/images/my-business-2.png)'}}></div>	
+                        <div className="business-box-img" style={{backgroundImage: 'url(assets/images/my-business-2.png)'}}></div>	
                         <div className="business-box-caption">
                             <div className="description">Attractive returns</div>
                         </div>
                     </div>
                     <div className="business-box">
-                        <div className="business-box-img" style={{'background-image': 'url(assets/images/my-business-3.png)'}}></div>	
+                        <div className="business-box-img" style={{backgroundImage: 'url(assets/images/my-business-3.png)'}}></div>	
                         <div className="business-box-caption">
                             <div className="description">Automatic payments</div>
                         </div>
                     </div>
                     <div className="business-box">
-                        <div className="business-box-img" style={{'background-image': 'url(assets/images/my-business-4.png)'}}></div>	
+                        <div className="business-box-img" style={{backgroundImage: 'url(assets/images/my-business-4.png)'}}></div>	
                         <div className="business-box-caption">
                             <div className="description">100% transparency</div>
                         </div>
                     </div>
                     <div className="business-box">
-                        <div className="business-box-img" style={{'background-image': 'url(assets/images/my-business-5.png)'}}></div>	
+                        <div className="business-box-img" style={{backgroundImage: 'url(assets/images/my-business-5.png)'}}></div>	
                         <div className="business-box-caption">
                             <div className="description">Sales reporting</div>
                         </div>
