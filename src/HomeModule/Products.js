@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
-const domainUrl = "http://localhost/hoponwheels/";
-//const domainUrl = "http://yotour.in/hoponwheels/";
+//const domainUrl = "http://localhost/hoponwheels/";
+const domainUrl = "http://yotour.in/hoponwheels/";
 const apiUrl = "api/products";
 const imageUrl = "storage/app/images/";
+//const navPath = '/reactapp/';
+const navPath = '/';
 
 class Products extends Component {
     constructor(props) {
@@ -30,7 +32,7 @@ class Products extends Component {
     render() {
         this.listingData = this.state.records.map(function(finalData, index){
             return <div key={ index } className="col-lg-3">
-                <div className="products-item">
+                <div className="products-item" onClick={() => {localStorage.setItem('pageName', JSON.stringify('products'));window.location.replace(navPath+'products/'+finalData.slug);}}>
                     {(() => {
                         switch (finalData.product_image_name) {
                             case "":
@@ -55,7 +57,7 @@ class Products extends Component {
                     {this.listingData}
                     <div className="col-lg-3">
                         <div className="products-item products-item-last-grid">
-                            <div className="products-item-btn"><button className="btn show-offer-btn text-uppercase">View All</button></div>
+                            <div className="products-item-btn"><button className="btn show-offer-btn text-uppercase" onClick={() => {localStorage.setItem('pageName', JSON.stringify('products'));window.location.replace(navPath+'products');}}>View All</button></div>
                         </div>
                     </div>
                 </div>

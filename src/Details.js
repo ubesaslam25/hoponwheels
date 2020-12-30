@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Header from './Include/Header';
 import FilterForm from './Include/FilterForm';
-import Products from './OffersModule/Products';
+import ProductDetails from './OffersModule/ProductDetails.js';
 import Footer from './Include/Footer';
 import { Helmet } from "react-helmet";
+console.log();
 
-class Home extends Component {
+class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,8 +32,8 @@ class Home extends Component {
                 <script crossorigin src="assets/js/jquery/jquery-2.2.4.min.js"></script>
                 <script crossorigin src="assets/js/jquery/jquery-ui.js"></script>
                 <script crossorigin src="assets/js/bootstrap/bootstrap.min.js"></script>
-                {/* <script crossorigin src="assets/js/magnific-popup/jquery.magnific-popup.min.js"></script>
-                <script crossorigin src="assets/js/jquery.counterup/waypoints.min.js"></script> */}
+                {/* <script crossorigin src="assets/js/magnific-popup/jquery.magnific-popup.min.js"></script> */}
+                {/* <script crossorigin src="assets/js/jquery.counterup/waypoints.min.js"></script> */}
                 <script crossorigin src="assets/js/jquery.counterup/jquery.counterup.min.js"></script>
                 <script crossorigin src="assets/js/owl-coursel/owl.carousel.js"></script>
                 {/* <script crossorigin src="assets/js/script.js"></script> */}
@@ -48,7 +49,7 @@ class Home extends Component {
                 <div className="container">
                     <div className="wrap-body-inner">
                         <FilterForm />
-                        <Products />
+                        <ProductDetails />
                     </div>
                 </div>
             </div>
@@ -58,4 +59,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Details;

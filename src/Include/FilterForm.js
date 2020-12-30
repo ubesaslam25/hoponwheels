@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 //import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { DatePickerComponent, TimePickerComponent } from '@syncfusion/ej2-react-calendars';
-const domainUrl = "http://localhost/hoponwheels/";
-//const domainUrl = "http://yotour.in/hoponwheels/";
+//const domainUrl = "http://localhost/hoponwheels/";
+const domainUrl = "http://yotour.in/hoponwheels/";
 const cityApi = "api/city";
 const pickupApi = "api/location/pickup";
 const returnApi = "api/location/dropoff";
 var $ = require( "jquery" );
 const split = require('split-string');
+//const navPath = '/reactapp/';
+const navPath = '/';
 
 class FilterForm extends Component {
     constructor(props) {
@@ -24,13 +26,14 @@ class FilterForm extends Component {
 			return_location: '',
 			apply_corporate_rate: 0
 		};
-		if(window.location.pathname !== '/offers'){
+		if(window.location.pathname === navPath){
 			localStorage.removeItem('result');
 		}
 		//window.location.reload(false);
 		//this.state.postdata = JSON.parse(localStorage.getItem('result'));
 		this.handleFilterSubmit = this.handleFilterSubmit.bind(this);
 		this.handleFilterChange = this.handleFilterChange.bind(this);
+		this.handlePickupDropoff = this.handlePickupDropoff.bind(this);
     }
     
     async componentDidMount() {
@@ -65,7 +68,33 @@ class FilterForm extends Component {
         if(returnData.length > 1){
             that.setState({ returnRecords: returnData });
 		}
-		
+		let rental_area_val = document.getElementsByName("rental_area").value;
+		fetch(domainUrl+pickupApi+'/'+rental_area_val)
+		.then(res => res.json())
+		.then(
+			(result) => {
+				that.setState({ pickupRecords: result });
+			},
+			(error) => {
+				this.setState({
+					isLoaded: true,
+					error
+				});
+			}
+		)
+		fetch(domainUrl+returnApi+'/'+rental_area_val)
+		.then(res => res.json())
+		.then(
+			(result) => {
+				that.setState({ returnRecords: result });
+			},
+			(error) => {
+				this.setState({
+					isLoaded: true,
+					error
+				});
+			}
+		)
 	}
 
 	handleFilterSubmit = (e) => {
@@ -83,10 +112,18 @@ class FilterForm extends Component {
 		let return_location = this.state.return_location;
 		let return_location_date_time = $('input[name=return_location_date]').val()+' '+$('input[name=return_location_time]').val();
 		let apply_corporate_rate = this.state.apply_corporate_rate;
-		let postData = [rental_area,rental_period,select_vehicle,pickup_location,pickup_location_date_time,return_location,return_location_date_time,apply_corporate_rate];
+		let postData = {
+			'rental_area':rental_area,
+			'rental_period':rental_period,
+			'select_vehicle':select_vehicle,
+			'pickup_location':pickup_location,
+			'pickup_location_date_time':pickup_location_date_time,
+			'return_location':return_location,
+			'return_location_date_time':return_location_date_time,
+			'apply_corporate_rate':apply_corporate_rate
+		};
 		localStorage.setItem('result', JSON.stringify(postData));
-		window.location.replace("/offers");
-
+		window.location.replace(navPath+"offers");
 	}
 
 	handleFilterChange = (e) => {
@@ -128,38 +165,79 @@ class FilterForm extends Component {
 		$("#returntime").html(hour+':'+time[1]+' '+ampm);
 	}
 
+	handlePickupDropoff = (e) => {
+		const target = e.target;
+        const that = this; 
+		let val = target.value;
+		fetch(domainUrl+pickupApi+'/'+val)
+		.then(res => res.json())
+		.then(
+			(result) => {
+				that.setState({ pickupRecords: result });
+			},
+			(error) => {
+				this.setState({
+					isLoaded: true,
+					error
+				});
+			}
+		)
+		fetch(domainUrl+returnApi+'/'+val)
+		.then(res => res.json())
+		.then(
+			(result) => {
+				that.setState({ returnRecords: result });
+			},
+			(error) => {
+				this.setState({
+					isLoaded: true,
+					error
+				});
+			}
+		)
+	}
+
     render() {
-		let getPostData = ["","short",1,"","","","",0];
+		let getPostData = {
+			'rental_area':'',
+			'rental_period':'short',
+			'select_vehicle':1,
+			'pickup_location':'',
+			'pickup_location_date_time':'',
+			'return_location':'',
+			'return_location_date_time':'',
+			'apply_corporate_rate':0
+		};
 		if(JSON.parse(localStorage.getItem('result'))){
 			getPostData = JSON.parse(localStorage.getItem('result'));
 			let monthArray = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			this.pickupMonth = monthArray[split(split(getPostData[4].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[0]];
-			this.pickupDay = split(split(getPostData[4].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[1];
-			this.pickupTiming = split(getPostData[4].toString(),{ separator: ' ' })[1]+' '+split(getPostData[4].toString(),{ separator: ' ' })[2];
+			this.pickupMonth = monthArray[split(split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[0]];
+			this.pickupDay = split(split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[1];
+			this.pickupTiming = split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[1]+' '+split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[2];
 			$("#pickupdate").html(this.pickupDay);
 			$("#pickupmonth").html(this.pickupMonth);
 			$("#pickuptime").html(this.pickupTiming);
-			// $("input[name=pickup_location_date]").val(split(getPostData[4].toString(),{ separator: ' ' })[0]);
+			// $("input[name=pickup_location_date]").val(split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0]);
 			// $("input[name=pickup_location_time]").val(this.pickupTiming);
-			this.returnMonth = monthArray[split(split(getPostData[6].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[0]];
-			this.returnDay = split(split(getPostData[6].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[1];
-			this.returnTiming = split(getPostData[6].toString(),{ separator: ' ' })[1]+' '+split(getPostData[6].toString(),{ separator: ' ' })[2];
+			this.returnMonth = monthArray[split(split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[0]];
+			this.returnDay = split(split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[1];
+			this.returnTiming = split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[1]+' '+split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[2];
 			$("#returndate").html(this.returnDay);
 			$("#returnmonth").html(this.returnMonth);
 			$("#returntime").html(this.returnTiming);
-			// $("input[name=return_location_date]").val(split(getPostData[6].toString(),{ separator: ' ' })[0]);
+			// $("input[name=return_location_date]").val(split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0]);
 			// $("input[name=return_location_time]").val(this.returnTiming);
 		}
 		//console.log(getPostData);
 		this.dateValue = new Date();
 		this.getCity = this.state.records.map(function(finalData, index){
-            return <option key={ index } value={ finalData.id } selected={Number(getPostData[0]) === finalData.id}>{ finalData.name }</option>
+            return <option key={ index } value={ finalData.id } selected={Number(getPostData['rental_area']) === finalData.id}>{ finalData.name }</option>
 		});
 		this.getPickupLocation = this.state.pickupRecords.map(function(finalData, index){
-			return <option key={ index } value={ finalData.id } selected={Number(getPostData[3]) === finalData.id}>{ finalData.location_name }</option>
+			return <option key={ index } value={ finalData.id } selected={Number(getPostData['pickup_location']) === finalData.id}>{ finalData.location_name }</option>
 		});
 		this.getReturnLocation = this.state.returnRecords.map(function(finalData, index){
-			return <option key={ index } value={ finalData.id } selected={Number(getPostData[5]) === finalData.id}>{ finalData.location_name }</option>
+			return <option key={ index } value={ finalData.id } selected={Number(getPostData['return_location']) === finalData.id}>{ finalData.location_name }</option>
 		});
         return (
 			<form onSubmit={this.handleFilterSubmit}>
@@ -173,7 +251,7 @@ class FilterForm extends Component {
 											<div className="description">
 												<div className="form-group">
 													<label>Rental Area</label>
-													<select className="form-control" name="rental_area" onChange={this.handleFilterChange}>
+													<select className="form-control" name="rental_area" onChange={e => { this.handleFilterChange(e); this.handlePickupDropoff(e) }}>
 														<option>Select City</option>
 														{this.getCity}
 													</select>
@@ -183,17 +261,17 @@ class FilterForm extends Component {
 													<div className="form-inline">
 														<div className="btn-group btn-group-vertical" data-toggle="buttons">
 															{(() => {
-																switch (getPostData[1]) {
+																switch (getPostData['rental_period']) {
 																	case "short":
 																		return <label id="rental_period_short" className={"btn active"} style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="short" defaultChecked={"checked"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
 																		</label>;
 																	default:
-																		return <label id="rental_period_short" className={(getPostData[1] === "short")?"btn active":"btn"} style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="short" defaultChecked={this.state.rental_period === "short"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
+																		return <label id="rental_period_short" className={(getPostData['rental_period'] === "short")?"btn active":"btn"} style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="short" defaultChecked={this.state.rental_period === "short"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
 																		</label>;
 																}
 															})()}
 															{(() => {
-																switch (getPostData[1]) {
+																switch (getPostData['rental_period']) {
 																	case "long":
 																		return <label id="rental_period_long" className="btn active" style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="long" defaultChecked={"checked"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Long-term</span>
 																		</label>;
@@ -213,7 +291,7 @@ class FilterForm extends Component {
 											<div className="description text-center">
 												<label className="vehicle-select-2 text-center layersMenu">
 													{(() => {
-														switch (getPostData[2]) {
+														switch (getPostData['select_vehicle']) {
 															case 1:
 																return <input type="radio" name="select_vehicle" value="1" defaultChecked={"checked"} onChange={this.handleFilterChange} />;
 															default:
@@ -227,7 +305,7 @@ class FilterForm extends Component {
 													<div className="vehicle-select-1 text-center"><span>Coming soon</span></div>
 													<label className="vehicle-select-2 text-center layersMenu">
 														{(() => {
-															switch (getPostData[2]) {
+															switch (getPostData['select_vehicle']) {
 																case 2:
 																	return <input type="radio" name="select_vehicle" value="1" defaultChecked={"checked"} onChange={this.handleFilterChange} />;
 																default:
@@ -240,7 +318,7 @@ class FilterForm extends Component {
 													
 													<label className="vehicle-select-3 text-center layersMenu">
 														{(() => {
-															switch (getPostData[2]) {
+															switch (getPostData['select_vehicle']) {
 																case 3:
 																	return <input type="radio" name="select_vehicle" value="1" defaultChecked={"checked"} onChange={this.handleFilterChange} />;
 																default:
@@ -253,7 +331,7 @@ class FilterForm extends Component {
 
 													<label className="vehicle-select-4 text-center layersMenu">
 														{(() => {
-															switch (getPostData[2]) {
+															switch (getPostData['select_vehicle']) {
 																case 4:
 																	return <input type="radio" name="select_vehicle" value="1" defaultChecked={"checked"} onChange={this.handleFilterChange} />;
 																default:
@@ -304,8 +382,8 @@ class FilterForm extends Component {
     												/> */}
 												</div>
 												<div className="form-group">
-													<DatePickerComponent value={(getPostData[4] === "")?this.dateValue:split(getPostData[4].toString(),{ separator: ' ' })[0]} name="pickup_location_date" onChange={this.handlePickupDate}></DatePickerComponent>
-													<TimePickerComponent value={(getPostData[4] === "")?this.dateValue:this.pickupTiming} name="pickup_location_time" onChange={this.handlePickupTime}></TimePickerComponent>
+													<DatePickerComponent value={(getPostData['pickup_location_date_time'] === "")?this.dateValue:split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0]} name="pickup_location_date" onChange={this.handlePickupDate}></DatePickerComponent>
+													<TimePickerComponent value={(getPostData['pickup_location_date_time'] === "")?this.dateValue:this.pickupTiming} name="pickup_location_time" onChange={this.handlePickupTime}></TimePickerComponent>
 													<div className="form-inline">
 														<label style={{opacity: '1'}}><span id="pickupdate"></span> <span id="pickupmonth" style={{color: 'var(--white)'}}></span></label>
 														<label style={{opacity: '1'}}><span id="pickuptime" style={{color: 'var(--white)'}}></span></label>
@@ -345,8 +423,8 @@ class FilterForm extends Component {
     												/> */}
 												</div>
 												<div className="form-group">
-													<DatePickerComponent value={(getPostData[6] === "")?this.dateValue:split(getPostData[6].toString(),{ separator: ' ' })[0]} name="return_location_date" onChange={this.handleReturnDate}></DatePickerComponent>
-													<TimePickerComponent value={(getPostData[4] === "")?this.dateValue:this.returnTiming} name="return_location_time" onChange={this.handleReturnTime}></TimePickerComponent>
+													<DatePickerComponent value={(getPostData['return_location_date_time'] === "")?this.dateValue:split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0]} name="return_location_date" onChange={this.handleReturnDate}></DatePickerComponent>
+													<TimePickerComponent value={(getPostData['pickup_location_date_time'] === "")?this.dateValue:this.returnTiming} name="return_location_time" onChange={this.handleReturnTime}></TimePickerComponent>
 													<div className="form-inline" onClick={this.handleReturn}>
 														<label style={{opacity: '1'}}><span id="returndate"></span> <span id="returnmonth" style={{color: 'var(--white)'}}></span></label>
 														<label style={{opacity: '1'}}><span id="returntime" style={{color: 'var(--white)'}}></span></label>
@@ -362,7 +440,7 @@ class FilterForm extends Component {
 													<div className="form-inline">
 														<div className="btn-group btn-group-vertical" data-toggle="buttons">
 															<label className="btn active" style={{opacity: '1'}}>
-															<input type="checkbox" name='apply_corporate_rate' value="0" onChange={this.handleFilterChange} defaultChecked /><i className="fa fa-square-o fa-2x"></i><i className="fa fa-check-square-o fa-2x"></i> <span> Apply corporate rate </span>
+															<input type="checkbox" name='apply_corporate_rate' value="0" onChange={this.handleFilterChange} /><i className="fa fa-square-o fa-2x"></i><i className="fa fa-check-square-o fa-2x"></i> <span> Apply corporate rate </span>
 															</label>
 														</div>
 													</div>

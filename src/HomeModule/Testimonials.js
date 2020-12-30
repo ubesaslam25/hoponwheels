@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import OwlCarousel from 'react-owl-carousel';
+// import 'owl.carousel/dist/assets/owl.carousel.css';
+// import 'owl.carousel/dist/assets/owl.theme.default.css';
+// var $ = require( "jquery" );
+
 class Testimonials extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +15,27 @@ class Testimonials extends Component {
     }
     
     componentDidMount() {
-        
+        // $('#customers-testimonials').owlCarousel({
+        //     loop: true,
+        //     center: true,
+        //     items: 3,
+        //     margin: 0,
+        //     autoplay: true,
+        //     dots:false,
+        //     autoplayTimeout: 8500,
+        //     smartSpeed: 450,
+        //     responsive: {
+        //         0: {
+        //             items: 1
+        //         },
+        //         768: {
+        //             items: 2
+        //         },
+        //         1170: {
+        //             items: 3
+        //         }
+        //     }
+        // });
     }
 
     render() {

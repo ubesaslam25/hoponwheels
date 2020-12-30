@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import Offers from './Offers';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Details from './Details';
+import Products from './HomeModule/Products';
+import ProductsDetails from './HomeModule/ProductDetails';
+import { BrowserRouter, /*HashRouter,*/ Route, Switch/*, Redirect*/ } from 'react-router-dom';
+//const navPath = '/reactapp/';
+const navPath = '/';
 
 class TimeLine extends Component {
     constructor(props) {
@@ -13,10 +18,14 @@ class TimeLine extends Component {
 
     render() {
         return (
-            <BrowserRouter forceRefresh={true}>
+            <BrowserRouter/* forceRefresh={true}*/>
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/offers" component={Offers} />
+                    <Route exact path={navPath} component={Home} />
+                    <Route exact path={navPath+"offers"} component={Offers} />
+                    <Route exact path={navPath+":slug"} component={Details} />
+                    <Route exact path={navPath+"products"} component={Products} />
+                    <Route exact path={navPath+"products/:slug"} component={ProductsDetails} />
+                    {/* <Redirect from='*' to='/404.html' /> */}
                 </Switch>
             </BrowserRouter>
         );

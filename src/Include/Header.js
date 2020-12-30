@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+//const navPath = '/reactapp/';
+const navPath = '/';
+
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +24,7 @@ class Header extends Component {
 					<div className="container">
 						<div className="row">
 							<div className="col-sm-2 col-md-2 col-lg-2">
-								<Link to={"/"} className="logo"><img src="assets/images/logo_1.png" alt="logo" /></Link>
+								<Link to={navPath} className="logo"><img src="assets/images/logo_1.png" alt="logo" /></Link>
 							</div>
 							<div className="col-sm-4 col-md-4 col-lg-4">
 								<ul className="pull-left top-left-nav">
@@ -49,10 +52,10 @@ class Header extends Component {
 											<span className="dropdown-toggle" data-toggle="dropdown">
 												<Link to={"#"} className="icon-1">
 													<span>Hi, User </span>
-													<div className="user-image">
+													{/* <div className="user-image">
 														<img src="assets/images/face-2.jpg" alt="user-icon" className="img-responsive" />
 														<i className="fa fa-angle-down"></i>
-													</div>
+													</div> */}
 												</Link>
 											</span>
 										</div>

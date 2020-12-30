@@ -16,6 +16,7 @@ import OurLocation from './HomeModule/OurLocation';
 import OurPartners from './HomeModule/OurPartners';
 import Footer from './Include/Footer';
 import { Helmet } from "react-helmet";
+//import { Loader } from "react-full-page-loader-overlay";
 
 class Home extends Component {
   constructor(props) {
@@ -26,16 +27,25 @@ class Home extends Component {
     };
   }
 
+  onBackButtonEvent(event) {
+    event.preventDefault();
+    // the user shouldn’t be able to move backward or forward
+  }
+  componentDidMount() {
+    window.onpopstate = this.onBackButtonEvent;
+  }
+
   render() {
     //const { data, value } = this.state;
     return (
       <div>
+          {/* <Loader show={true} fillIn={false} /> */}
           <Helmet>
             <link rel="stylesheet" href="assets/css/custom/index.css" />
             <script crossorigin src="assets/js/jquery/jquery-2.2.4.min.js"></script>
             <script crossorigin src="assets/js/jquery/jquery-ui.js"></script>
             <script crossorigin src="assets/js/bootstrap/bootstrap.min.js"></script>
-            <script crossorigin src="assets/js/magnific-popup/jquery.magnific-popup.min.js"></script>
+            {/* <script crossorigin src="assets/js/magnific-popup/jquery.magnific-popup.min.js"></script> */}
             {/* <script crossorigin src="assets/js/jquery.counterup/waypoints.min.js"></script> */}
             <script crossorigin src="assets/js/jquery.counterup/jquery.counterup.min.js"></script>
             <script crossorigin src="assets/js/owl-coursel/owl.carousel.js"></script>
