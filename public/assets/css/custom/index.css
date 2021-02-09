@@ -357,7 +357,7 @@ figcaption, .fa-calendar, .fa-clock-o{
     letter-spacing: 0px;
     opacity: 1 !important;
 }
-#pickupdate, #returndate{
+#pickupdate, #returndate, .pickupdate, .returndate{
     color: var(--white);
     text-align: left;
     font-size: 31px;
@@ -365,7 +365,7 @@ figcaption, .fa-calendar, .fa-clock-o{
     letter-spacing: 0px;
     opacity: 1;
 }
-#pickupmonth, #returnmonth{
+#pickupmonth, #returnmonth, .pickupmonth, .returnmonth{
     color: var(--white);
     text-align: left;
     font-size: var(--font16px);
@@ -373,7 +373,7 @@ figcaption, .fa-calendar, .fa-clock-o{
     letter-spacing: 0px;
     opacity: 1;
 }
-#pickuptime, #returntime{
+#pickuptime, #returntime, .pickuptime, .returntime{
     color: var(--white);
     text-align: left;
     font-size: 14px;
@@ -382,7 +382,7 @@ figcaption, .fa-calendar, .fa-clock-o{
     opacity: 1;
 }
 .pickup label, .return label{
-    margin-right: 15px;
+    margin-right: 36px;
     cursor: pointer;
 }
 .show-offer-btn {
@@ -477,9 +477,9 @@ label.layersMenu > input + img {
     cursor:pointer;
     border:2px solid transparent;
 }
-label.layersMenu > input:checked + img {
+/* label.layersMenu > input:checked + img {
     border:2px solid var(--red);
-}
+} */
 .banner-text-offer div{
     margin-top: 100px;
     padding-bottom: 120px;
@@ -1468,4 +1468,245 @@ display: inline-block;
     width: 20px;
 }
 
-/** Offer Stickers **/
+/** Nav bar **/
+.navbar-toggle{
+    margin-bottom: 0;
+}
+.navbar-toggle .icon-bar{
+    background-color: #ffffff;
+}
+
+/** Left Modal **/
+.modal.left .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 350px;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+}
+.modal.left .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+.modal.left .modal-body {
+    /* padding: 15px 30px 80px; */
+    padding: 0 12px 0;
+}
+.modal.left.fade .modal-dialog {
+    left: -320px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+        -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+            transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+.modal.left.fade.in .modal-dialog {
+    left: 0;
+    top: 50px;
+}
+.modal.left.fade.in .modal-dialog .modal-content {
+    border-radius: unset;
+    background-color: rgb(6 12 23);
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .modal-title{
+    font-size: 18px;
+    color: #ffffff;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .products-image{
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body ul.accomodation{
+    list-style-type: none;
+    margin-top: 15px;
+    margin-top: 20px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body ul.accomodation li{
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .price{
+    padding: 15px;
+    border: 2px #333 solid;
+    width: 88%;
+    margin-top: 25px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .price ul li:nth-last-child(1){
+    padding-top: 10px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .price ul li:nth-last-child(1) span{
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .price ul li:nth-last-child(1) span small{
+    color: #333;
+    font-size: 70%;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .payment{
+    text-align: left;
+    margin-top: 15px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .payment .btn-group-vertical>.btn{
+    /* float: none; */
+    margin-top: 5px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .payment .btn-group-vertical .btn span{
+    padding-left: 5px;
+    padding-right: 0;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .payment .btn-group-vertical .btn span:nth-last-child(1){
+    padding-left: 0;
+    color: unset;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .payment .btn-group-vertical label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o, .modal.left.fade.in .modal-dialog .modal-content .modal-body .payment .btn-group-vertical label input[type="radio"] ~ i.fa.fa-circle-o{
+    font-size: 16px;
+}
+.modal.left.fade.in .modal-dialog .modal-content .modal-body .payment button{
+    margin-top: 15px;
+    width: 88%;
+}
+
+/** Responsive Styling **/
+@media only screen and (max-width: 360px) {
+    .bg-3{
+        background-size: cover;
+    }
+    .logo img{
+        margin-top: 10px;
+    }
+    .bs-navbar-collapse ul li {
+        float: unset;
+    }
+    /* .bs-navbar-collapse h5{
+        color: #FE003C;
+        border-bottom: 2px solid #FE003C;
+    } */
+    .dektopView{
+        display: none;
+    }
+    .mobileView .search-1{
+        margin-top: 30px;
+        background: transparent;
+    }
+    .mobileView .search-1{
+        padding-top: 0;
+    }
+    .mobileView .search-1 .p-xs-15{
+        padding: 0 !important;
+    }
+    .mobileView .main-timeline .timeline{
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .mobileView .main-timeline .timeline:last-child{
+        margin-bottom: 20px;
+    }
+    .mobileView .main-timeline .timeline .timeline-content{
+        float: unset;
+        width: 100%;
+    }
+    .mobileView .main-timeline .description:after{
+        display: none;
+    }
+    .banner-text-offer img{
+        display: none;
+    }
+    .banner-text-offer div {
+        margin-top: 65px;
+        padding-bottom: 150px;
+        float: left;
+        padding-left: 0px;
+    }
+    .banner-text-offer div h3{
+        font-size: 32px;
+    }
+    .m-t-lg-90{
+        margin-top: 0px!important;
+    }
+    .product-grid-2 .product-item{
+        width: 100%;
+    }
+    .product-grid-2 .product-item h1{
+        margin-top: 0;
+        text-align: center;
+    }
+    .product-grid-2 .product-item h3{
+        text-align: center;
+    }
+    .carousel-caption a.btn-default{
+        margin-left: 5px;
+    }
+    .products-grid-2 .products-item{
+        padding: 20px;
+    }
+    .mobile-app-ads{
+        background-position: right;
+    }
+    .mobile-app-ads .text-box, .membership-banner .text-box{
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .highlight-list .highlight-list-item.heading{
+        padding-bottom: 0;
+    }
+    .highlight-list .highlight-list-item .highlight-list-img img{
+        width: 100%;
+    }
+    .videos-social-box{
+        padding: 15px;
+    }
+    .videos-social-box .section-social .social-box{
+        width: 100%;
+    }
+    .my-business .business-box{
+        width: 90%;
+        margin-left: 5%;
+        float: unset;
+    }
+    .how-location .city, .how-location .pickup-spots{
+        font-size: 20px;
+    }
+    .how-location .location-btn{
+        right: 10%;
+    }
+    .our-partners .row .col-lg-2:nth-child(7), .our-partners .row .col-lg-2:nth-child(8), .our-partners .row .col-lg-2:nth-child(9), .our-partners .row .col-lg-2:nth-child(10), .our-partners .row .col-lg-2:nth-child(11), .our-partners .row .col-lg-2:nth-child(12), .our-partners .row .col-lg-2:nth-child(13), .our-partners .row .col-lg-2:nth-child(14), .our-partners .row .col-lg-2:nth-child(15), .our-partners .row .col-lg-2:nth-child(16){
+        width: 100%;
+    }
+    .videos-social-box .section-videos .video-box .video-box-caption .title{
+        font-size: 15px;
+    }
+    .top-header .container .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .modal.left.fade.bs-filter-collapse.in .modal-dialog .modal-content .modal-body button.close{
+        position: absolute;
+        right: 10px;
+        top: -27px;
+    }
+    .modal.left.fade.bs-filter-collapse.in .modal-dialog .modal-content .modal-body button.close span{
+        color: #fff;
+        opacity: 1;
+        font-size: 20px;
+    }
+    .modal.left.fade.bs-navbar-collapse.in .modal-dialog .modal-content .modal-body button.close{
+        position: absolute;
+        right: 25px;
+        top: 15px;
+    }
+    .block-sl a.scroll-text{
+        top: 10px;
+        left: 10px;
+    }
+    .block-sl a.scroll-icon{
+        bottom: 110px;
+        left: 192px;
+    }
+}

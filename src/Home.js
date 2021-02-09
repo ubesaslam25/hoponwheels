@@ -15,6 +15,7 @@ import OurBusiness from './HomeModule/OurBusiness';
 import OurLocation from './HomeModule/OurLocation';
 import OurPartners from './HomeModule/OurPartners';
 import Footer from './Include/Footer';
+import $ from "jquery";
 import { Helmet } from "react-helmet";
 //import { Loader } from "react-full-page-loader-overlay";
 
@@ -32,6 +33,11 @@ class Home extends Component {
     // the user shouldn’t be able to move backward or forward
   }
   componentDidMount() {
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        $('.preloader p').fadeOut();
+        $('.preloader').delay(500).fadeOut('slow');
+        $('body').delay(600).css({'overflow':'visible'});
+    });
     window.onpopstate = this.onBackButtonEvent;
   }
 
@@ -50,14 +56,14 @@ class Home extends Component {
             <script crossorigin src="assets/js/jquery.counterup/jquery.counterup.min.js"></script>
             <script crossorigin src="assets/js/owl-coursel/owl.carousel.js"></script>
             <script crossorigin src="assets/js/script.js"></script>
-            <script crossorigin src="assets/js/jquery.timepicker.min.js"></script>
-            <script crossorigin src="assets/js/jquery.datetimepicker.full.min.js"></script>
+            {/* <script crossorigin src="assets/js/jquery.timepicker.min.js"></script>
+            <script crossorigin src="assets/js/jquery.datetimepicker.full.min.js"></script> */}
             <script crossorigin src="assets/js/less.min.js"></script>
-            <script crossorigin src="assets/js/owl.carousel.min.js"></script>
+            {/* <script crossorigin src="assets/js/owl.carousel.min.js"></script> */}
             <script crossorigin src="assets/js/custom/index.js"></script>
           </Helmet>
           <Header />
-          <FilterForm />
+          <div className="dektopView"><FilterForm /></div>
           <BannerContent />
           <div id="wrap-body" className="p-t-lg-45">
 				    <div className="container">

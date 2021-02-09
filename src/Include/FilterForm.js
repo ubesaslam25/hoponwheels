@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { DatePickerComponent, TimePickerComponent } from '@syncfusion/ej2-react-calendars';
+// import TimeKeeper from 'react-timekeeper'; //https://catc.github.io/react-timekeeper/#custom-styles
 //const domainUrl = "http://localhost/hoponwheels/";
 const domainUrl = "http://yotour.in/hoponwheels/";
 const cityApi = "api/city";
@@ -24,7 +25,8 @@ class FilterForm extends Component {
 			select_vehicle: 1,
 			pickup_location: '',
 			return_location: '',
-			apply_corporate_rate: 0
+			apply_corporate_rate: 0,
+			formFields: []
 		};
 		if(window.location.pathname === navPath){
 			localStorage.removeItem('result');
@@ -40,15 +42,15 @@ class FilterForm extends Component {
 		let currentDate = new Date();
 		let currentDay = split(currentDate.toString(),{ separator: ' ' })[2];
 		let currentMonth = split(currentDate.toString(),{ separator: ' ' })[1];
-		$("#pickupdate").html(currentDay);
-		$("#pickupmonth").html(currentMonth);
-		$("#returndate").html(currentDay);
-		$("#returnmonth").html(currentMonth);
+		$(".pickupdate").html(currentDay);
+		$(".pickupmonth").html(currentMonth);
+		$(".returndate").html(currentDay);
+		$(".returnmonth").html(currentMonth);
 		let time = split(split(currentDate.toString(),{ separator: ' ' })[4].toString(), { separator: ':' });
 		let ampm = time[0] < 12 ? 'AM' : 'PM';
 		let hour = time[0] % 12 || 12;
-		$("#pickuptime").html(hour+':'+time[1]+' '+ampm);
-		$("#returntime").html(hour+':'+time[1]+' '+ampm);
+		$(".pickuptime").html(hour+':'+time[1]+' '+ampm);
+		$(".returntime").html(hour+':'+time[1]+' '+ampm);
         const that = this; 
         const response = await fetch(domainUrl+cityApi);
         const data = await response.json();
@@ -136,8 +138,8 @@ class FilterForm extends Component {
 	handlePickupDate = (e) => {
 		const pickupdate = e.value;
 		const pickupdateArray = split(pickupdate.toString(), { separator: ' ' });
-		$("#pickupdate").html(pickupdateArray[2]);
-		$("#pickupmonth").html(pickupdateArray[1]);
+		$(".pickupdate").html(pickupdateArray[2]);
+		$(".pickupmonth").html(pickupdateArray[1]);
 	}	
 	
 	handlePickupTime = (e) => {
@@ -146,14 +148,14 @@ class FilterForm extends Component {
 		let time = split(pickuptimeArray[4].toString(), { separator: ':' });
 		let ampm = time[0] < 12 ? 'AM' : 'PM';
 		let hour = time[0] % 12 || 12;
-		$("#pickuptime").html(hour+':'+time[1]+' '+ampm);
+		$(".pickuptime").html(hour+':'+time[1]+' '+ampm);
 	}	
 
 	handleReturnDate = (e) => {
 		const returndate = e.value;
 		const returndateArray = split(returndate.toString(), { separator: ' ' });
-		$("#returndate").html(returndateArray[2]);
-		$("#returnmonth").html(returndateArray[1]);
+		$(".returndate").html(returndateArray[2]);
+		$(".returnmonth").html(returndateArray[1]);
 	}
 
 	handleReturnTime = (e) => {
@@ -162,7 +164,7 @@ class FilterForm extends Component {
 		let time = split(returntimeArray[4].toString(), { separator: ':' });
 		let ampm = time[0] < 12 ? 'AM' : 'PM';
 		let hour = time[0] % 12 || 12;
-		$("#returntime").html(hour+':'+time[1]+' '+ampm);
+		$(".returntime").html(hour+':'+time[1]+' '+ampm);
 	}
 
 	handlePickupDropoff = (e) => {
@@ -214,17 +216,17 @@ class FilterForm extends Component {
 			this.pickupMonth = monthArray[split(split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[0]];
 			this.pickupDay = split(split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[1];
 			this.pickupTiming = split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[1]+' '+split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[2];
-			$("#pickupdate").html(this.pickupDay);
-			$("#pickupmonth").html(this.pickupMonth);
-			$("#pickuptime").html(this.pickupTiming);
+			$(".pickupdate").html(this.pickupDay);
+			$(".pickupmonth").html(this.pickupMonth);
+			$(".pickuptime").html(this.pickupTiming);
 			// $("input[name=pickup_location_date]").val(split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0]);
 			// $("input[name=pickup_location_time]").val(this.pickupTiming);
 			this.returnMonth = monthArray[split(split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[0]];
 			this.returnDay = split(split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0].toString(),{ separator: '/' })[1];
 			this.returnTiming = split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[1]+' '+split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[2];
-			$("#returndate").html(this.returnDay);
-			$("#returnmonth").html(this.returnMonth);
-			$("#returntime").html(this.returnTiming);
+			$(".returndate").html(this.returnDay);
+			$(".returnmonth").html(this.returnMonth);
+			$(".returntime").html(this.returnTiming);
 			// $("input[name=return_location_date]").val(split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0]);
 			// $("input[name=return_location_time]").val(this.returnTiming);
 		}
@@ -239,6 +241,9 @@ class FilterForm extends Component {
 		this.getReturnLocation = this.state.returnRecords.map(function(finalData, index){
 			return <option key={ index } value={ finalData.id } selected={Number(getPostData['return_location']) === finalData.id}>{ finalData.location_name }</option>
 		});
+		//console.log(getPostData);
+		const { rental_area, pickup_location, return_location } = this.state;
+		const isEnabled = rental_area.length > 0 && pickup_location.length > 0 && return_location.length > 0;
         return (
 			<form onSubmit={this.handleFilterSubmit}>
 				<div className="search-1 m-t-sm-40">
@@ -384,9 +389,10 @@ class FilterForm extends Component {
 												<div className="form-group">
 													<DatePickerComponent value={(getPostData['pickup_location_date_time'] === "")?this.dateValue:split(getPostData['pickup_location_date_time'].toString(),{ separator: ' ' })[0]} name="pickup_location_date" onChange={this.handlePickupDate}></DatePickerComponent>
 													<TimePickerComponent value={(getPostData['pickup_location_date_time'] === "")?this.dateValue:this.pickupTiming} name="pickup_location_time" onChange={this.handlePickupTime}></TimePickerComponent>
+													{/* <TimeKeeper time={"4:45 PM"} switchToMinuteOnHourSelect={true} /> */}
 													<div className="form-inline">
-														<label style={{opacity: '1'}}><span id="pickupdate"></span> <span id="pickupmonth" style={{color: 'var(--white)'}}></span></label>
-														<label style={{opacity: '1'}}><span id="pickuptime" style={{color: 'var(--white)'}}></span></label>
+														<label style={{opacity: '1'}}><span className="pickupdate"></span> <span className="pickupmonth" style={{color: 'var(--white)'}}></span></label>
+														<label style={{opacity: '1'}}><span className="pickuptime" style={{color: 'var(--white)'}}></span></label>
 													</div>
 												</div>
 											</div>
@@ -426,8 +432,8 @@ class FilterForm extends Component {
 													<DatePickerComponent value={(getPostData['return_location_date_time'] === "")?this.dateValue:split(getPostData['return_location_date_time'].toString(),{ separator: ' ' })[0]} name="return_location_date" onChange={this.handleReturnDate}></DatePickerComponent>
 													<TimePickerComponent value={(getPostData['pickup_location_date_time'] === "")?this.dateValue:this.returnTiming} name="return_location_time" onChange={this.handleReturnTime}></TimePickerComponent>
 													<div className="form-inline" onClick={this.handleReturn}>
-														<label style={{opacity: '1'}}><span id="returndate"></span> <span id="returnmonth" style={{color: 'var(--white)'}}></span></label>
-														<label style={{opacity: '1'}}><span id="returntime" style={{color: 'var(--white)'}}></span></label>
+														<label style={{opacity: '1'}}><span className="returndate"></span> <span className="returnmonth" style={{color: 'var(--white)'}}></span></label>
+														<label style={{opacity: '1'}}><span className="returntime" style={{color: 'var(--white)'}}></span></label>
 													</div>
 												</div>
 											</div>
@@ -446,7 +452,7 @@ class FilterForm extends Component {
 													</div>
 												</div>
 												<div className="form-group">
-													<button className="btn show-offer-btn" type="submit"><i className="fa fa-search"></i> Show Offers</button>
+													<button className="btn show-offer-btn" disabled={!isEnabled} type="submit"><i className="fa fa-search"></i> Show Offers</button>
 												</div>
 											</div>
 										</div>
