@@ -57,7 +57,7 @@ class Products extends Component {
                     {this.listingData}
                     <div className="col-lg-3">
                         <div className="products-item products-item-last-grid">
-                            <div className="products-item-btn"><button className="btn show-offer-btn text-uppercase" onClick={() => {localStorage.setItem('pageName', JSON.stringify('products'));window.location.replace(navPath+'products');}}>View All</button></div>
+                            <div className="products-item-btn"><button className="btn show-offer-btn text-uppercase" onClick={() => {localStorage.setItem('pageName', JSON.stringify('products'));window.location.replace(navPath+'products');}} style={{top: '3058px', left: '1506px', width: '247px', height: '113px', background: 'transparent linear-gradient(115deg, #FE003C 0%, #E1001F 100%) 0% 0% no-repeat padding-box', opacity: 1}}>View All</button></div>
                         </div>
                     </div>
                 </div>

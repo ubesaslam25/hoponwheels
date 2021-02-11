@@ -381,6 +381,10 @@ figcaption, .fa-calendar, .fa-clock-o{
     letter-spacing: 0px;
     opacity: 1;
 }
+.pickupdate, .pickupmonth, .pickuptime, .pickup .e-date-wrapper:not(.e-filled) .e-date-icon.e-icons, .pickup .e-time-wrapper .e-time-icon.e-icons{
+    position: relative;
+    top: -22px;
+}
 /* .returntime{
     position: relative;
     top: -28px;
@@ -482,9 +486,9 @@ label.layersMenu > input + img {
     cursor:pointer;
     border:2px solid transparent;
 }
-label.layersMenu > input:checked + img {
+/* label.layersMenu > input:checked + img {
     border:2px solid var(--red);
-}
+} */
 .banner-text-offer div{
     margin-top: 100px;
     padding-bottom: 120px;
@@ -1074,7 +1078,10 @@ border: 1px solid #50a840;
     text-align: left;
     font-size: 15px;
 }
-.product-driver-details .col-lg-7 form .form-group{
+.product-driver-details form .formErrorMsg{
+    color: red;
+}
+.product-driver-details form .col-lg-7 .form-group{
     text-align: left;
 }
 .product-driver-details .col-lg-7 .btn-group-vertical>.btn{
@@ -1118,17 +1125,17 @@ border: 1px solid #50a840;
     top: 2px;
     margin-right: 5px;
 }
-.product-driver-details .col-lg-7 form .form-group label, .product-driver-details .col-lg-7 form .form-group input{
+.product-driver-details form .col-lg-7 .form-group label, .product-driver-details form .col-lg-7 .form-group input{
     color: #000000 !important;
     width: 100%;
 }
-.product-driver-details .col-lg-7 form .form-group input, .product-driver-details .col-lg-7 form .form-group input:focus, .product-driver-details .col-lg-7 form .form-group select{
+.product-driver-details form .col-lg-7 .form-group input, .product-driver-details form .col-lg-7 .form-group input:focus, .product-driver-details form .col-lg-7 .form-group select{
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom: 1px #000000 solid;
 }
-.product-driver-details .col-lg-7 form .form-group select{
+.product-driver-details form .col-lg-7 .form-group select{
     -webkit-appearance: none;
     -moz-appearance: none;
     background: transparent;
@@ -1136,27 +1143,27 @@ border: 1px solid #50a840;
     background-repeat: no-repeat;
     background-position-x: 100%;
 }
-.product-driver-details .col-lg-7 form .form-group.mobile select{
+.product-driver-details form .col-lg-7 .form-group.mobile select{
     width: 15%;
 
 }
-.product-driver-details .col-lg-7 form .form-group.mobile input{
+.product-driver-details form .col-lg-7 .form-group.mobile input{
     width: 83%;
 }
-.product-driver-details .col-lg-7 form .form-group.dob input{
+.product-driver-details form .col-lg-7 .form-group.dob input{
     width: 20%;
 }
-.product-driver-details .col-lg-7 form .form-group.dob input:nth-last-child(1){
+.product-driver-details form .col-lg-7 .form-group.dob input:nth-last-child(1){
     width: 40%;
 }
-.product-driver-details .col-lg-7 form .form-group.dob i{
+.product-driver-details form .col-lg-7 .form-group.dob i{
     color: #000000;
 }
-.product-driver-details .col-lg-7 form .col-lg-6 .col-lg-6{
+.product-driver-details form .col-lg-7 .col-lg-6 .col-lg-6{
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
-.product-driver-details .col-lg-7 form .col-lg-6 .col-lg-6 select{
+.product-driver-details form .col-lg-7 .col-lg-6 .col-lg-6 select{
     width: 100%;
 }
 .product-driver-details .col-lg-5 .col-lg-4 .products-image{
@@ -1658,5 +1665,5 @@ border: 1px solid #50a840;
     height: 25px;
     border: 1px #848484 solid;
 }
-  }
+
   

@@ -373,6 +373,10 @@ figcaption, .fa-calendar, .fa-clock-o{
     letter-spacing: 0px;
     opacity: 1;
 }
+.pickupdate, .pickupmonth, .pickuptime, .pickup .e-date-wrapper:not(.e-filled) .e-date-icon.e-icons, .pickup .e-time-wrapper .e-time-icon.e-icons{
+    position: relative;
+    top: -22px;
+}
 #pickuptime, #returntime, .pickuptime, .returntime{
     color: var(--white);
     text-align: left;

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 //import Substring from 'react-substring';
 import $ from "jquery";
 import CurrencyFormat from 'react-currency-format';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 //const domainUrl = "http://localhost/hoponwheels/";
 const domainUrl = "http://yotour.in/hoponwheels/";
 const apiUrl = "api/product/details/";
@@ -47,7 +48,6 @@ class ProductDetails extends Component {
             essentialsCheckedSum: 0,
             addonsChecked: [],
             addonsCheckedSum: 0
-
         };
         //this.state.postdata = JSON.parse(localStorage.getItem('result'));
         this.submitBooking = this.submitBooking.bind(this);
@@ -283,22 +283,10 @@ class ProductDetails extends Component {
     handleSelectOffers = (e) => {
         // console.log(e.target);
         if(e.target.checked === true){
-            this.state.essentialsChecked.push(Number(e.target.value));
-            // this.setState({essentialsCheckedSum: this.state.essentialsChecked.reduce(function(a, b){ return a + b; }, 0)});
-            this.state.essentialsCheckedSum = this.state.essentialsChecked.reduce(function(a, b){
-                return a + b;
-            }, 0);
+            this.state.essentialsCheckedSum = this.state.essentialsCheckedSum + Number(e.target.value);
         }else{
-            var index = this.state.essentialsChecked.indexOf(Number(e.target.value))
-            if (index !== -1) {
-                this.state.essentialsChecked.splice(index, 1);
-                this.setState({essentialsChecked: Number(this.state.essentialsChecked)});
-                this.setState({essentialsCheckedSum: this.state.essentialsChecked.reduce(function(a, b){ return a + b; }, 0)});
-                // this.state.essentialsCheckedSum = this.state.essentialsChecked.reduce(function(a, b){
-                //     return a + b;
-                // }, 0);
-            }
-        }      
+            this.state.essentialsCheckedSum = this.state.essentialsCheckedSum - Number(e.target.value);
+        }     
         var offersPostData = this.state.postdata;
         var pickupLocationDate = new Date(offersPostData.pickup_location_date_time);
         var returnLocationDate = new Date(offersPostData.return_location_date_time);
@@ -325,21 +313,9 @@ class ProductDetails extends Component {
 
     handleListingAddons = (e) => {
         if(e.target.checked === true){
-            this.state.addonsChecked.push(Number(e.target.value));
-            // this.setState({addonsCheckedSum: this.state.addonsChecked.reduce(function(a, b){ return a + b; }, 0)});
-            this.state.addonsCheckedSum = this.state.addonsChecked.reduce(function(a, b){
-                return a + b;
-            }, 0);
+            this.state.addonsCheckedSum = this.state.addonsCheckedSum + Number(e.target.value);
         }else{
-            var index = this.state.addonsChecked.indexOf(Number(e.target.value))
-            if (index !== -1) {
-                this.state.addonsChecked.splice(index, 1);
-                this.setState({addonsChecked: Number(this.state.addonsChecked)});
-                this.setState({addonsCheckedSum: this.state.addonsChecked.reduce(function(a, b){ return a + b; }, 0)});
-                // this.state.addonsCheckedSum = this.state.addonsChecked.reduce(function(a, b){
-                //     return a + b;
-                // }, 0);
-            }
+            this.state.addonsCheckedSum = this.state.addonsCheckedSum - Number(e.target.value);
         }      
         //console.log(this.state.addonsCheckedSum);
         var offersPostData = this.state.postdata;
@@ -909,7 +885,7 @@ class ProductDetails extends Component {
                                             <div className="tax">(Tax included) </div>
                                         </td>
                                         <td>
-                                            <div className="total-amount">Rs.&nbsp;
+                                            <div className="total-amount">
                                                 <b id="extra_addons_total_3">
                                                 {/* {(() => {
                                                     if(Number(this.state.extraAddonsVal) === 0){
@@ -935,164 +911,226 @@ class ProductDetails extends Component {
                 </div>
 
                 <div className="row product-driver-details" id={"productDriverDetails"} style={{'display': 'none'}}>
-                    <div className="col-lg-7">
-                        <h5>Personal Details</h5>
-                        <form method="post" action="#">
-                            <div className="col-lg-12">
-                                <div className="form-group">
-                                    <div className="form-inline">
-                                        <div className="btn-group btn-group-vertical" data-toggle="buttons">
-                                            <label className="btn active">
-                                            <input type="radio" name="driver_pre_name" defaultChecked /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Mr. </span>
-                                            </label>
-                                            <label className="btn">
-                                            <input type="radio" name="driver_pre_name" /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Ms.</span>
-                                            </label>
+                    <Formik
+                        initialValues={{ first_name:'', last_name:'', email:'', mobile_number:'', dob_year: '', address:'', city:'', state:'', country:'', zip_code:'' }}
+                        validate={values => {
+                            const errors = {};
+                            if(!values.first_name) {
+                                errors.first_name = 'Required';
+                            }
+                            if(!values.last_name) {
+                                errors.last_name = 'Required';
+                            }
+                            if (!values.email) {
+                                errors.email = 'Required';
+                            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                                errors.email = 'Invalid email address';
+                            }
+                            if(!values.mobile_number) {
+                                errors.mobile_number = 'Required';
+                            }
+                            if(!values.dob_year) {
+                                errors.dob_year = 'Required';
+                            }
+                            if(!values.address) {
+                                errors.address = 'Required';
+                            }
+                            if(!values.city) {
+                                errors.city = 'Required';
+                            }
+                            if(!values.state) {
+                                errors.state = 'Required';
+                            }
+                            if(!values.country) {
+                                errors.country = 'Required';
+                            }
+                            if(!values.zip_code) {
+                                errors.zip_code = 'Required';
+                            }
+                            return errors;
+                        }}
+                        onSubmit={(values, { setSubmitting }) => {
+                            setTimeout(() => {
+                                alert(JSON.stringify(values, null, 2));
+                                this.submitBooking(values);
+                                setSubmitting(false);
+                            }, 400);
+                        }}
+                    >
+                         {/* onClick={e => {this.submitBooking(e)}} */}
+                        {({ isSubmitting }) => (
+                        <Form>
+                            <div className="col-lg-7">
+                                <h5>Personal Details</h5>
+                                <div className="col-lg-12">
+                                    <div className="form-group">
+                                        <div className="form-inline">
+                                            <div className="btn-group btn-group-vertical" data-toggle="buttons">
+                                                <label className="btn active">
+                                                <input type="radio" name="driver_pre_name" defaultChecked /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Mr. </span>
+                                                </label>
+                                                <label className="btn">
+                                                <input type="radio" name="driver_pre_name" /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Ms.</span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="clearfix"></div>
-                            <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>First name</label>
-                                    <input type="text" name="" />
-                                </div>
-                                <div className="form-group">
-                                    <label>Last name</label>
-                                    <input type="text" name="" />
-                                </div>
-                                <div className="form-group">
-                                    <label>Email</label>
-                                    <input type="text" name="" />
-                                </div>
-                                <div className="form-group mobile">
-                                    <label>Mobile</label>
-                                    <select name="">
-                                        <option value="">+91</option>
-                                        <option value="">+88</option>
-                                    </select>
-                                    <input type="text" name="" />
-                                </div>
-                                <div className="form-group dob">
-                                    <label>Mobile</label>
-                                    <input type="text" name="dob_date" placeholder="DD" />
-                                    <input type="text" name="dob_month" placeholder="MM" />
-                                    <input type="text" name="dob_year" placeholder="YYYY" />
-                                    <i className="fa fa-calendar"></i>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>Address</label>
-                                    <input type="text" name="" />
+                                    <div className="formErrorMsg"><ErrorMessage name="driver_pre_name" /></div>
                                 </div>
                                 <div className="clearfix"></div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
-                                        <label>City</label>
-                                        <select name="">
-                                            {this.getCity}
-                                        </select>
+                                        <label>First name</label>
+                                        <input type="text" name="first_name" />
+                                        <div className="formErrorMsg"><ErrorMessage name="first_name" /></div>
                                     </div>
-                                </div>
-                                <div className="col-lg-6" style={{paddingLeft: '15px !important'}}>
                                     <div className="form-group">
-                                        <label>State</label>
-                                        <select name="">
-                                            {this.getState}
+                                        <label>Last name</label>
+                                        <input type="text" name="last_name" />
+                                        <div className="formErrorMsg"><ErrorMessage name="last_name" /></div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Email</label>
+                                        <input type="text" name="email" />
+                                        <div className="formErrorMsg"><ErrorMessage name="email" /></div>
+                                    </div>
+                                    <div className="form-group mobile">
+                                        <label>Mobile</label>
+                                        <select name="country_code">
+                                            <option value="">+91</option>
+                                            <option value="">+88</option>
                                         </select>
+                                        <input type="text" name="mobile_number" />
+                                        <div className="formErrorMsg"><ErrorMessage name="mobile_number" /></div>
+                                    </div>
+                                    <div className="form-group dob">
+                                        <label>Mobile</label>
+                                        <input type="text" name="dob_date" placeholder="DD" />
+                                        <input type="text" name="dob_month" placeholder="MM" />
+                                        <input type="text" name="dob_year" placeholder="YYYY" />
+                                        <i className="fa fa-calendar"></i>
+                                        <div className="clearfix"></div>
+                                        <div className="formErrorMsg"><ErrorMessage name="dob_year" /></div>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
-                                        <label>Country</label>
-                                        <select name="">
-                                            {this.getCountry}
-                                        </select>
+                                        <label>Address</label>
+                                        <input type="text" name="address" />
+                                        <div className="formErrorMsg"><ErrorMessage name="address" /></div>
                                     </div>
-                                </div>
-                                <div className="col-lg-6" style={{paddingLeft: '15px !important'}}>
-                                    <div className="form-group">
-                                        <label>ZIP</label>
-                                        <input type="text" name="" />
+                                    <div className="clearfix"></div>
+                                    <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label>City</label>
+                                            <select name="city">
+                                                {this.getCity}
+                                            </select>
+                                        </div>
+                                        <div className="formErrorMsg"><ErrorMessage name="city" /></div>
+                                    </div>
+                                    <div className="col-lg-6" style={{paddingLeft: '15px !important'}}>
+                                        <div className="form-group">
+                                            <label>State</label>
+                                            <select name="state">
+                                                {this.getState}
+                                            </select>
+                                        </div>
+                                        <div className="formErrorMsg"><ErrorMessage name="state" /></div>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label>Country</label>
+                                            <select name="country">
+                                                {this.getCountry}
+                                            </select>
+                                        </div>
+                                        <div className="formErrorMsg"><ErrorMessage name="country" /></div>
+                                    </div>
+                                    <div className="col-lg-6" style={{paddingLeft: '15px !important'}}>
+                                        <div className="form-group">
+                                            <label>ZIP</label>
+                                            <input type="text" name="zip_code" />
+                                        </div>
+                                        <div className="formErrorMsg"><ErrorMessage name="zip_code" /></div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div className="col-lg-5">
-                        <h5>Reviews &amp; Book</h5>
-                        <div className="col-lg-4">
-                            {(() => {
-                                switch (this.state.records.product_image_name) {
-                                    case "":
-                                        return <div className="products-image" style={{backgroundImage: 'url(assets/images/product1.png)'}}></div>;
-                                    default:
-                                        return <div className="products-image" style={{backgroundImage: 'url('+domainUrl+imageUrl+this.state.records.product_image_name+')'}}></div>;
-                                }
-                            })()}
-                        </div>
-                        <div className="col-lg-8">
-                            <h6>{this.state.records.product_name}</h6>
-                            <ul>
-                                <li>Pick up</li>
-                                <li>Return</li>
-                                {this.listingcarpickuprecords}
-                                {this.listingcarreturnrecords}
-                                <li>{pickupLocationDateTime}</li>
-                                <li>{returnLocationDateTime}</li>
-                            </ul>
-                        </div>
-                        <div className="clearfix"></div>
-                        <div className="col-lg-4">
-                            <b>Cancellation Policy:</b>
-                            <ul>
-                                <li>{(this.state.records.cancellation_policy !== null) ? this.state.records.cancellation_policy_description : ""}</li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-5">
-                            <b>Late Return Policy:</b>
-                            <ul>
-                                <li>{(this.state.records.late_return_policy !== null) ? this.state.records.late_return_policy_description : ""}</li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-3">
-                            <b>Damage Policy:</b>
-                            <ul>
-                                <li>{(this.state.records.damage_policy !== null) ? this.state.records.damage_policy_description : ""}</li>
-                            </ul>
-                        </div>
-                        <div className="clearfix"></div>
-                        <div className="table-responsive">
-                            <table className="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div className="total">Total</div>
-                                            <div className="tax">(Tax included)</div>
-                                        </td>
-                                        <td>
-                                            <div className="total-amount" id="final_total_amount">
-                                                {/* Rs. {
-                                                        this.state.expectedKmValue > this.state.records.cut_off_kms ? Number( this.state.records.price
-                                                            )+(Number( this.state.expectedKmValue
-                                                            )-Number( this.state.records.cut_off_kms
-                                                            ))*Number( this.state.records.price_per_km_after_cutoff
-                                                            ) : Number( this.state.records.price
-                                                                )
-                                                    } */}
-                                                    </div>
-                                            {/* <div className="view-detail"><Link to={"#"}>View details</Link></div> */}
-                                        </td>
-                                        <td>
-                                            <button className="btn show-offer-btn book-now-btn" onClick={e => {this.submitBooking(e)}}>Book &amp; Pay</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                            <div className="col-lg-5">
+                                <h5>Reviews &amp; Book</h5>
+                                <div className="col-lg-4">
+                                    {(() => {
+                                        switch (this.state.records.product_image_name) {
+                                            case "":
+                                                return <div className="products-image" style={{backgroundImage: 'url(assets/images/product1.png)'}}></div>;
+                                            default:
+                                                return <div className="products-image" style={{backgroundImage: 'url('+domainUrl+imageUrl+this.state.records.product_image_name+')'}}></div>;
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-lg-8">
+                                    <h6>{this.state.records.product_name}</h6>
+                                    <ul>
+                                        <li>Pick up</li>
+                                        <li>Return</li>
+                                        {this.listingcarpickuprecords}
+                                        {this.listingcarreturnrecords}
+                                        <li>{pickupLocationDateTime}</li>
+                                        <li>{returnLocationDateTime}</li>
+                                    </ul>
+                                </div>
+                                <div className="clearfix"></div>
+                                <div className="col-lg-4">
+                                    <b>Cancellation Policy:</b>
+                                    <ul>
+                                        <li>{(this.state.records.cancellation_policy !== null) ? this.state.records.cancellation_policy_description : ""}</li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-5">
+                                    <b>Late Return Policy:</b>
+                                    <ul>
+                                        <li>{(this.state.records.late_return_policy !== null) ? this.state.records.late_return_policy_description : ""}</li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-3">
+                                    <b>Damage Policy:</b>
+                                    <ul>
+                                        <li>{(this.state.records.damage_policy !== null) ? this.state.records.damage_policy_description : ""}</li>
+                                    </ul>
+                                </div>
+                                <div className="clearfix"></div>
+                                <div className="table-responsive">
+                                    <table className="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div className="total">Total</div>
+                                                    <div className="tax">(Tax included)</div>
+                                                </td>
+                                                <td>
+                                                    <div className="total-amount" id="final_total_amount">
+                                                        {/* Rs. {
+                                                                this.state.expectedKmValue > this.state.records.cut_off_kms ? Number( this.state.records.price
+                                                                    )+(Number( this.state.expectedKmValue
+                                                                    )-Number( this.state.records.cut_off_kms
+                                                                    ))*Number( this.state.records.price_per_km_after_cutoff
+                                                                    ) : Number( this.state.records.price
+                                                                        )
+                                                            } */}
+                                                            </div>
+                                                    {/* <div className="view-detail"><Link to={"#"}>View details</Link></div> */}
+                                                </td>
+                                                <td>
+                                                    <button type="submit" disabled={isSubmitting} className="btn show-offer-btn book-now-btn">Book &amp; Pay</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </Form>
+                        )}
+                    </Formik>
                 </div>
 
                 <div className='customAlert' id="customAlert">
@@ -1103,6 +1141,7 @@ class ProductDetails extends Component {
                 </div>
                 <div className="boxoverlay" id="boxoverlay"></div>
 
+                
             </div> 
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { DatePickerComponent, TimePickerComponent } from '@syncfusion/ej2-react-calendars';
 // import TimeKeeper from 'react-timekeeper'; //https://catc.github.io/react-timekeeper/#custom-styles
+import ReactTooltip from "react-tooltip";
 //const domainUrl = "http://localhost/hoponwheels/";
 const domainUrl = "http://yotour.in/hoponwheels/";
 const cityApi = "api/city";
@@ -255,7 +256,7 @@ class FilterForm extends Component {
 										<div className="timeline-content">
 											<div className="description">
 												<div className="form-group">
-													<label>Rental Area</label>
+													<label>Rental City</label>
 													<select className="form-control" name="rental_area" onChange={e => { this.handleFilterChange(e); this.handlePickupDropoff(e) }}>
 														<option>Select City</option>
 														{this.getCity}
@@ -268,23 +269,35 @@ class FilterForm extends Component {
 															{(() => {
 																switch (getPostData['rental_period']) {
 																	case "short":
-																		return <label id="rental_period_short" className={"btn active"} style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="short" defaultChecked={"checked"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
+																		return <label id="rental_period_short" className={"btn active"} style={{opacity: '1'}} onClick={this.handleFilterChange} data-for="shortIn"
+																		data-tip="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+																		data-iscapture="true"><input type="radio" name='rental_period' value="short" defaultChecked={"checked"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
 																		</label>;
 																	default:
-																		return <label id="rental_period_short" className={(getPostData['rental_period'] === "short")?"btn active":"btn"} style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="short" defaultChecked={this.state.rental_period === "short"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
+																		return <label id="rental_period_short" className={(getPostData['rental_period'] === "short")?"btn active":"btn"} style={{opacity: '1'}} onClick={this.handleFilterChange} data-for="shortOut"
+																		data-tip="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+																		data-iscapture="true"><input type="radio" name='rental_period' value="short" defaultChecked={this.state.rental_period === "short"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i> <span> Short-term </span>
 																		</label>;
 																}
 															})()}
+															<ReactTooltip id="shortIn" multiline={true} />
+															<ReactTooltip id="shortOut" multiline={true} />
 															{(() => {
 																switch (getPostData['rental_period']) {
 																	case "long":
-																		return <label id="rental_period_long" className="btn active" style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="long" defaultChecked={"checked"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Long-term</span>
+																		return <label id="rental_period_long" className="btn active" style={{opacity: '1'}} onClick={this.handleFilterChange} data-for="longIn"
+																		data-tip="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+																		data-iscapture="true"><input type="radio" name='rental_period' value="long" defaultChecked={"checked"} /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Long-term</span>
 																		</label>;
 																	default:
-																		return <label id="rental_period_long" className="btn" style={{opacity: '1'}} onClick={this.handleFilterChange}><input type="radio" name='rental_period' value="long" /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Long-term</span>
+																		return <label id="rental_period_long" className="btn" style={{opacity: '1'}} onClick={this.handleFilterChange} data-for="longOut"
+																		data-tip="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+																		data-iscapture="true"><input type="radio" name='rental_period' value="long" /><i className="fa fa-circle-o fa-2x"></i><i className="fa fa-dot-circle-o fa-2x"></i><span> Long-term</span>
 																		</label>;
 																}
 															})()}
+															<ReactTooltip id="longIn" multiline={true} />
+															<ReactTooltip id="longOut" multiline={true} />
 														</div>
 													</div>
 												</div>
@@ -356,6 +369,13 @@ class FilterForm extends Component {
 											<div className="description pickup">
 												<div className="form-group">
 													<label>Pick Up</label>
+													<div className="form-inline">
+														<div className="btn-group btn-group-vertical" data-toggle="buttons">
+															<label className="btn active" style={{opacity: '1'}}>
+															<input type="checkbox" name='doorstep_pickup' value="0" onChange={this.handleFilterChange} /><i className="fa fa-square-o fa-2x"></i><i className="fa fa-check-square-o fa-2x"></i> <span> Doorstep Pickup </span>
+															</label>
+														</div>
+													</div>
 													<select className="form-control" name="pickup_location" onChange={this.handleFilterChange}>
 														<option>Select Location</option>
 														{this.getPickupLocation}
